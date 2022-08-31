@@ -1,1 +1,60 @@
-# brother
+Guidelines for Project Web Sites
+================================
+
+*   preferrably not on my.fit.edu (which expires some time after you graduate), but on a more permanent external site.
+*   provide all the entries for this semester in the template below, including due dates and document placeholders for milestones
+*   the url via Canvas by 12noon on the date the Project Plan is due
+
+* * *
+
+Project Name
+
+...
+
+Team Members and Email Addresses
+
+...
+
+Faculty Advisor
+
+...
+
+### First Semester
+
+Plan (Sep 7)
+
+[Plan](plan1.pdf), [Presentation](plan1Pres.pdf)
+
+Milestone 1 (Oct 3)
+
+[Requirement](requirement.pdf), [Design](design.pdf), [Test](test.pdf), [Presentation](milestone1.pdf), [Progress Evaluation](eval1.pdf)
+
+Milestone 2 (Oct 31)
+
+[Presentation](milestone3.pdf), [Progress Evaluation](eval2.pdf)
+
+Milestone 3 (Nov 28)
+
+[Presentation](milestone3.pdf), [Progress Evaluation](eval3.pdf)
+
+### Second Semester
+
+Plan (Jan 16)
+
+[Plan](plan2.pdf), [Presentation](plan2Pres.pdf)
+
+Milestone 4 (Feb 13)
+
+[Presentation](milestone4.pdf), [Progress Evaluation](eval4.pdf)
+
+Milestone 5 (Mar 20)
+
+[Poster](poster.pdf), [e-book page](ebook.pdf), [Presentation](milestone5.pdf), [Progress Evaluation](eval5.pdf)
+
+Milestone 6 (Apr 17)
+
+[User and/or Developer Manual](userManual.pdf), [Demo Video](demoVideo.jpg), [Presentation](milestone6.pdf), [Progress Evaluation](eval6.pdf)
+
+* * *
+
+[Philip Chan](http://www.cs.fit.edu/~pkc/)
