@@ -1,15 +1,5 @@
-Guidelines for Project Web Sites
-================================
 
-*   preferrably not on my.fit.edu (which expires some time after you graduate), but on a more permanent external site.
-*   provide all the entries for this semester in the template below, including due dates and document placeholders for milestones
-*   the url via Canvas by 12noon on the date the Project Plan is due
-
-* * *
-
-Project Name
-
-...
+# Synthetic Data Pipeline for Pose Estimation
 
 Team Members and Email Addresses
 
@@ -17,7 +7,7 @@ Team Members and Email Addresses
 
 Faculty Advisor
 
-...
+Dr. Ryan White
 
 ### First Semester
 
