@@ -1,9 +1,12 @@
 
 # Synthetic Data Pipeline for Pose Estimation
 
-Team Members and Email Addresses
+Team Members and Email Addresses:
 
-...
+Nathan Pichette (npichette2018@my.fit.edu)
+William Stern (wstern2019@my.fit.edu)
+Stephane Baruch (sbaruch2019@my.fit.edu)
+Hanibal Alazar  (halazar2019@my.fit.edu)
 
 Faculty Advisor
 
