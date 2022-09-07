@@ -13,7 +13,7 @@ Hanibal Alazar  (halazar2019@my.fit.edu)
 
 
 
-Faculty Advisor
+Faculty Advisor:
 
 Dr. Ryan White
 
