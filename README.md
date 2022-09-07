@@ -12,6 +12,7 @@ Stephane Baruch (sbaruch2019@my.fit.edu)
 Hanibal Alazar  (halazar2019@my.fit.edu)
 
 
+
 Faculty Advisor
 
 Dr. Ryan White
