@@ -25,7 +25,7 @@ Plan (Sep 7)
 
 Milestone 1 (Oct 3)
 
-[Requirement](requirement.pdf), [Design](design.pdf), [Test](test.pdf), [Presentation](milestone1.pdf), [Progress Evaluation](eval1.pdf)
+[Requirement](requirement.pdf), [Design](design1.pdf), [Test](test.pdf), [Presentation](Mile1presen.pdf), [Progress Evaluation](eval1.pdf)
 
 Milestone 2 (Oct 31)
 
