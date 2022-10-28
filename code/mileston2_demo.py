@@ -144,6 +144,12 @@ def main():
     
     base_path = os.getcwd()
     import_package_windows("tomli")
+
+    #toml_path = base_path + r"\tomconfig.toml"
+
+    # with open(mode="rb") as fp:
+    #     tomconfig = tomli.load(fp)
+    
     sat_path = base_path + r"\models\nasa-aqua-satellite-obj\nasa-aqua-satellite.obj"
     bpy.ops.import_scene.obj(filepath=sat_path)
 
