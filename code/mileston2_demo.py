@@ -2,6 +2,47 @@ import bpy
 import numpy as np
 import os
 
+def import_package_windows(package):
+    # import subprocess
+    # import sys
+    # import os
+    
+    # # path to python.exe
+    # python_exe = os.path.join(sys.prefix, 'bin', 'python.exe')
+    
+    # # upgrade pip
+    # subprocess.call([python_exe, "-m", "ensurepip"])
+    # subprocess.call([python_exe, "-m", "pip", "install", "--upgrade", "pip"])
+    
+    # # install required packages
+    # subprocess.call([python_exe, "-m", "pip", "install", package])
+
+    #import importlib
+
+    #i = importlib.import_module(package)
+
+    import subprocess
+    import ensurepip
+    import sys
+    # ensurepip.bootstrap()
+    # pybin = sys.executable
+    # subprocess.check_call([pybin, '-m', 'pip', 'install', package])
+    import importlib
+
+    # 
+
+    
+    python_exe = os.path.join(sys.prefix, 'bin', 'python.exe')
+    target = os.path.join(sys.prefix, 'lib', 'site-packages')
+    
+    subprocess.call([python_exe, '-m', 'ensurepip'])
+    subprocess.call([python_exe, '-m', 'pip', 'install', '--upgrade', 'pip'])
+
+    #example package to install (SciPy):
+    subprocess.call([python_exe, '-m', 'pip', 'install', '--upgrade', package, '-t', target])
+    i = importlib.import_module(package)
+    
+    print('DONE')
 
 
 def back_ground_adder(filepath):
@@ -95,13 +136,14 @@ def get_location(obj, frame):
     bpy.context.scene.frame_set(frame)
     global_location = obj.matrix_world.to_quaternion()
 
-    print(global_location)
+    print(global_location[0], global_location[1], global_location[2], global_location[3])
 
 def main():
     bpy.ops.wm.read_homefile(use_empty=True)
     delete_all_objects()
     
-    base_path = r"C:\Users\stern\Documents\college\senior_proj\datapipeline4101"
+    base_path = os.getcwd()
+    import_package_windows("tomli")
     sat_path = base_path + r"\models\nasa-aqua-satellite-obj\nasa-aqua-satellite.obj"
     bpy.ops.import_scene.obj(filepath=sat_path)
 
@@ -115,12 +157,13 @@ def main():
     
     positions = (0,0,1),(0,1,1),(0,2,1),(1,4,1),(1,6,1)
 
-    print("POS", len(positions))
-    len_of_ani = 1
+    
+    
+    len_of_ani = 10
 
-    frame_gap = (len_of_ani*24) // len(positions)
+    frame_gap = (len_of_ani*24) // len(positions)   
 
-   
+    print("FRAMEGAP:", frame_gap)
 
     # start with frame 0
     number_of_frame = 0  
@@ -139,20 +182,25 @@ def main():
             satt.keyframe_insert(data_path="rotation_euler", index=-1)
 
         # move next 10 frames forward - Blender will figure out what to do between this time
-        number_of_frame += frame_gap
+        number_of_frame += frame_gap-1
     #print("FFFF")
 
     bpy.context.scene.render.image_settings.file_format='JPEG'
-    bpy.context.scene.render.filepath = "C:/tmp/"
+    output_dir = "E:/tmp/"
 
     for frame in range(len_of_ani*24):
         bpy.context.scene.frame_set(frame)
-        bpy.ops.render.render(write_still=True)
+        bpy.context.scene.render.filepath = output_dir + str(frame)
+        bpy.ops.render.render('INVOKE_DEFAULT', write_still=True)
 
 
     #bpy.ops.render.render('INVOKE_DEFAULT', animation=True, use_viewport = True, write_still=True)
     #print("FFFF")
-    for frame in range(10*len(positions)):
+    for frame in range(len_of_ani*24):
+        print(frame)
         get_location(sat[0], frame)
     #bpy.ops.render.view_show()
+
+    print("POS", len(positions))
+    print("FRAMEGAP:", frame_gap)
 main()
