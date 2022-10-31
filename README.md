@@ -29,7 +29,7 @@ Milestone 1 (Oct 3)
 
 Milestone 2 (Oct 31)
 
-[Presentation](milestone3.pdf), [Progress Evaluation](eval2.pdf)
+[Presentation](milestone3.pdf), [Progress Evaluation](update_doc_2.pdf)
 
 Milestone 3 (Nov 28)
 
