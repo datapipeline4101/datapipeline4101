@@ -154,6 +154,8 @@ def main():
     bpy.ops.import_scene.obj(filepath=sat_path)
 
     sat = bpy.context.selected_objects
+
+    print(sat)
     
     create_light(type="POINT", energy=1000, location=(10,-10,10))
 

@@ -15,7 +15,7 @@ render_layer_node = tree.nodes.new('CompositorNodeRLayers')
 file_output_node = tree.nodes.new('CompositorNodeOutputFile')
 
 # Scales image to dimensions set in the Render panel, my case 1280x720
-scale_node.space = "RELATIVE"
+scale_node.space = "CROP"
 
 # Select output folder, i.e. where to store rendered images
 file_output_node.base_path = "C:/tmp/"

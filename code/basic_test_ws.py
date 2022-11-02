@@ -3,9 +3,7 @@ import numpy as np
 import os
 from sklearn import linear_model
 
-reg = linear_model.LinearRegression()
-reg.fit([[0, 0], [1, 1], [2, 2]], [0, 1, 2])
-print(reg.coef_)
+
 def back_ground_adder(filepath):
   img = bpy.data.images.load(filepath)
   bpy.data.images.load(filepath, check_existing=False)

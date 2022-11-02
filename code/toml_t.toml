@@ -1,9 +1,6 @@
 [lighting]
 # Lighting type "point" or "sun"
 light_type = "POINT"
-
-
-
 # Location of point source
 light_x = 0
 light_y = 0
