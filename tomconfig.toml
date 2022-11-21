@@ -22,4 +22,4 @@ rotations = [[0,0,0],[0.8,2.4,1.5]]
 [animation]
 animation_lenth = 15 # In seconds
 file_format = "JPEG"
-output_dir = "E:/tmp/"
+output_dir = "C:/Users/SteBa/Downloads/datapipeline4101/output/"

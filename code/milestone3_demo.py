@@ -170,7 +170,7 @@ def main():
     
     positions = toml_dict["flightpath"]["positions"]
     rotations = toml_dict["flightpath"]["rotations"]
-
+    
     
     ani_setting = toml_dict["animation"]
 
@@ -179,6 +179,24 @@ def main():
     frame_gap = (len_of_ani*24) // (len(positions)-1)
 
     print("FRAMEGAP:", frame_gap)
+
+    if toml_dict["flightpath"]["flight_path_type"] == "FUNCTION":
+
+        def flight_path(position_x, frame_distance):
+            new_position_x = position_x + frame_distance[0] #pow function isn't working
+            new_position_y = 0.01 * position_x**2
+            new_position_z = 0.01 * position_x**2
+            new_position = (new_position_x, new_position_y, new_position_z)
+            return new_position
+#POSIBLE CHANGES:
+        start_position = positions[0]
+        end_position = positions[1]
+        start_to_finish = tuple(map(lambda i, j: j-i, start_position, end_position))
+        position_amount = toml_dict["animation"]["animation_lenth"] * 24
+        frame_distance = tuple(map(lambda i: i/position_amount, start_to_finish))
+        for i in range(position_amount):
+            start_position = flight_path(start_position[0], frame_distance)
+
 
     # start with frame 0
     number_of_frame = 0  
