@@ -2,15 +2,13 @@
 # Lighting type "point" or "sun"
 light_type = "POINT"
 # Location of point source
-light_x = 0
-light_y = 0
-light_z = 0
+location = (10, -10, 10)
 # Strength of light source
-light_wattage = 10000
+energy = 10000
 
 [satellite]
 #path to satellite inside file
-satellite_file= "/aqua/nasa-aqua-satellite.obj"
+satellite_file= "/models/nasa-aqua-satellite.obj"
 
 [background]
 #path to satellite inside file

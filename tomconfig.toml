@@ -1,22 +1,25 @@
-# toml for satellite render file
-
 [lighting]
-
-# Lighting type "point" or "sun"
 light_type = "POINT"
+location = [10, -10, 10]
+energy = 10000
 
-# Location of point source
-light_x = 10
-light_y = 0
-light_z = 3
-
-# Strength of light source
-light_wattage = 10000
+[camera]
+location = [9.69, -5.85, 12.388]
+rotation = [0.6799, 0.0, 0.8254]
+lens = 20
 
 [satellite]
-#path to satellite inside file
-satellite_file= "aqua/nasa-aqua-satellite.obj"
+satellite_file= "/models/nasa-aqua-satellite-obj/nasa-aqua-satellite.obj"
 
 [background]
-#path to satellite inside file
-background_file= "/space.png"
+background_file= "/code/space.jpg"
+
+[flightpath]
+flight_path_type = "LINEAR" # 
+positions = [[0,0,1],[1,6,1]]
+rotations = [[0,0,0],[0.8,2.4,1.5]]
+
+[animation]
+animation_lenth = 15 # In seconds
+file_format = "JPEG"
+output_dir = "E:/tmp/"
