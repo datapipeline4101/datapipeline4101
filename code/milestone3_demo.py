@@ -150,7 +150,7 @@ def get_location(obj, frame):
     bpy.context.scene.frame_set(frame)
     global_location = obj.matrix_world.to_quaternion()
 
-    print(global_location[0], global_location[1], global_location[2], global_location[3])
+    return(global_location[0], global_location[1], global_location[2], global_location[3])
 
 def main():
     bpy.ops.wm.read_homefile(use_empty=True)
@@ -283,6 +283,23 @@ def main():
         print(frame)
         get_location(sat[0], frame)
     #bpy.ops.render.view_show()
+
+    import json
+    annotations = []
+
+    for frame in range(len_of_ani*24):
+        annotation = {
+            'Frame': frame ,
+            'Image': output_dir + str(frame),
+            'Pose_info': get_location(sat[0], frame), 
+        }
+
+        annotations.append(annotation)
+        print(frame)
+        get_location(sat[0], frame)
+
+    with open(output_dir+"sample.json" , "w") as outfile:
+        outfile.write(json.dumps(annotations))
 
     print("POS", len(positions))
     print("FRAMEGAP:", frame_gap)
