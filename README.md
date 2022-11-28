@@ -33,7 +33,7 @@ Milestone 2 (Oct 31)
 
 Milestone 3 (Nov 28)
 
-[Presentation](milestone3.pdf), [Progress Evaluation](update_doc_3.pdf)
+[Presentation](Mile3_pres.pdf), [Progress Evaluation](update_doc_3.pdf)
 
 ### Second Semester
 
