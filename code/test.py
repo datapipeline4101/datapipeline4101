@@ -12,7 +12,7 @@ def main():
     start_position = positions[0]
     end_position = positions[1]
     start_to_finish = tuple(map(lambda i, j: j-i, start_position, end_position))
-    video_length = 30 #User input in seconds. Usually input but it's a set number for testing purposes
+    video_length = 2 #User input in seconds. Usually input but it's a set number for testing purposes
     position_amount = video_length * 24
     frame_distance = tuple(map(lambda i: i/position_amount, start_to_finish))
     print("start position", start_position)

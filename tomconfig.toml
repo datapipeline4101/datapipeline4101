@@ -4,8 +4,8 @@ location = [10, -10, 10]
 energy = 10000
 
 [camera]
-location = [9.69, -5.85, 12.388]
-rotation = [0.6799, 0.0, 0.8254]
+location = [0.0, -6.5, 0.0]
+rotation = [1.5, 0.0, 0.0]
 lens = 20
 
 [satellite]
@@ -15,11 +15,13 @@ satellite_file= "/models/nasa-aqua-satellite-obj/nasa-aqua-satellite.obj"
 background_file= "/code/space.jpg"
 
 [flightpath]
-flight_path_type = "LINEAR" # 
-positions = [[0,0,1],[1,6,1]]
+flight_path_type = "FUNCTION" # 
+positions = [[0,0,0],[5,6,1]]
 rotations = [[0,0,0],[0.8,2.4,1.5]]
+y_eq = "0*x**2"
+z_eq = "0.01*x**2"
 
 [animation]
-animation_lenth = 15 # In seconds
+animation_lenth = 2 # In seconds
 file_format = "JPEG"
-output_dir = "C:/Users/SteBa/Downloads/datapipeline4101/output/"
+output_dir = "E:/tmp/"

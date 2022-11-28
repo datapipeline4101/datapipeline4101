@@ -1,6 +1,7 @@
 import bpy
-import numpy as np
+#import numpy as np
 import os
+#from scipy.interpolate import interp1d
 #import tomllib
 
 def import_package_windows(package):
@@ -40,10 +41,22 @@ def import_package_windows(package):
     subprocess.call([python_exe, '-m', 'pip', 'install', '--upgrade', 'pip'])
 
     #example package to install (SciPy):
-    subprocess.call([python_exe, '-m', 'pip', 'install', '--upgrade', package, '-t', target])
+    subprocess.call([python_exe, '-m', 'pip', 'install', '--upgrade', package, '-t', target,])
     i = importlib.import_module(package)
     print(i)
     print('DONE')
+
+def find_xy(p1, p2, z):
+
+    x1, y1, z1 = p1
+    x2, y2, z2 = p2
+    if z2 < z1:
+        return find_xy(p2, p1, z)
+
+    x = numpy.interp(z, (z1, z2), (x1, x2))
+    y = numpy.interp(z, (z1, z2), (y1, y2))
+
+    return x, y
 
 
 def back_ground_adder(filepath):
@@ -146,6 +159,8 @@ def main():
     base_path = os.getcwd() 
     import_package_windows("toml")
     import toml
+    import_package_windows("scipy")
+    from scipy.interpolate import interp1d
     toml_path = base_path + r"\tomconfig.toml"
 
 
@@ -180,43 +195,78 @@ def main():
 
     print("FRAMEGAP:", frame_gap)
 
-    if toml_dict["flightpath"]["flight_path_type"] == "FUNCTION":
+    if toml_dict["flightpath"]["flight_path_type"] == "POINT":
+        number_of_frame = 0  
+        for idx in range(len(positions)):
+            
+            for satt in sat:
 
-        def flight_path(position_x, frame_distance):
-            new_position_x = position_x + frame_distance[0] #pow function isn't working
-            new_position_y = 0.01 * position_x**2
-            new_position_z = 0.01 * position_x**2
+                # now we will describe frame with number $number_of_frame
+                scene.frame_set(number_of_frame)
+
+                # set new location for sphere $kule and new rotation for cube $kostka
+                satt.location = positions[idx]
+                satt.keyframe_insert(data_path="location", index=-1)
+
+                satt.rotation_euler = rotations[idx]
+                satt.keyframe_insert(data_path="rotation_euler", index=-1)
+
+            # move next 10 frames forward - Blender will figure out what to do between this time
+            number_of_frame += frame_gap-1
+        #print("FFFF")
+
+    if toml_dict["flightpath"]["flight_path_type"] == "FUNCTION":
+        positions = []
+        print("AAAAAAAAAAAAAAAAAAAAAAAA")
+        def flight_path(x, frame_distance):
+            new_position_x = x + frame_distance[0] #pow function isn't working
+            new_position_y = eval(toml_dict["flightpath"]["y_eq"])
+            new_position_z = eval(toml_dict["flightpath"]["z_eq"])
             new_position = (new_position_x, new_position_y, new_position_z)
             return new_position
 #POSIBLE CHANGES:
-        start_position = positions[0]
-        end_position = positions[1]
+        start_position = toml_dict["flightpath"]["positions"][0]
+        end_position = toml_dict["flightpath"]["positions"][1]
         start_to_finish = tuple(map(lambda i, j: j-i, start_position, end_position))
         position_amount = toml_dict["animation"]["animation_lenth"] * 24
         frame_distance = tuple(map(lambda i: i/position_amount, start_to_finish))
         for i in range(position_amount):
             start_position = flight_path(start_position[0], frame_distance)
+            print("new position", start_position)
+            positions.append(start_position)
+
+        ani_setting = toml_dict["animation"]
+
+        len_of_ani = ani_setting["animation_lenth"]
+
+        frame_gap = (len_of_ani*24) // (len(positions)-1)
 
 
-    # start with frame 0
-    number_of_frame = 0  
-    for idx in range(len(positions)):
-        
-        for satt in sat:
+        # start with frame 0
+        number_of_frame = 0  
+        for idx in range(len(positions)):
+            
+            for satt in sat:
 
-            # now we will describe frame with number $number_of_frame
-            scene.frame_set(number_of_frame)
+                # now we will describe frame with number $number_of_frame
+                scene.frame_set(number_of_frame)
 
-            # set new location for sphere $kule and new rotation for cube $kostka
-            satt.location = positions[idx]
-            satt.keyframe_insert(data_path="location", index=-1)
+                # set new location for sphere $kule and new rotation for cube $kostka
+                satt.location = positions[idx]
+                print(positions[idx])
+                satt.keyframe_insert(data_path="location", index=-1)
 
-            satt.rotation_euler = rotations[idx]
-            satt.keyframe_insert(data_path="rotation_euler", index=-1)
+                if idx == 0 or idx == len(positions)-1:
+                    print("ROT IDX", idx)
+                    if idx ==0:
+                        satt.rotation_euler = rotations[idx]
+                    else:
+                        satt.rotation_euler = rotations[-1]
+                    satt.keyframe_insert(data_path="rotation_euler", index=-1)
 
-        # move next 10 frames forward - Blender will figure out what to do between this time
-        number_of_frame += frame_gap-1
-    #print("FFFF")
+            # move next 10 frames forward - Blender will figure out what to do between this time
+            number_of_frame += 1
+        #print("FFFF")
 
     bpy.context.scene.render.image_settings.file_format=ani_setting["file_format"]
     output_dir = ani_setting["output_dir"]
