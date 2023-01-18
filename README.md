@@ -39,7 +39,7 @@ Milestone 3 (Nov 28)
 
 Plan (Jan 16)
 
-[Plan](plan2.pdf), [Presentation](plan2Pres.pdf)
+[Plan](Senior Proj2 plan-1.pdf), [Presentation](plan2Pres.pdf)
 
 Milestone 4 (Feb 13)
 
