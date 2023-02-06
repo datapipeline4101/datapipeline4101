@@ -12,6 +12,7 @@ files = sorted(files,key=lambda x: int(os.path.splitext(x)[0]))
 print(files)
 
 images = [img for img in files if img.endswith(".jpg")]
+images = images[0:240]
 frame = cv2.imread(os.path.join(image_folder, images[0]))
 height, width, layers = frame.shape
 
