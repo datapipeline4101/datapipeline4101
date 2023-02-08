@@ -5,6 +5,7 @@ import bpy
 import os
 import tqdm
 import toml
+import math
 
 
 def import_package_windows(package):
@@ -240,6 +241,14 @@ def main():
     bpy.ops.import_scene.obj(filepath=sat_path)
 
     sat = bpy.context.selected_objects
+
+    earth_path = (base_path + toml_dict["earth"]["earth_file"]).encode('unicode_escape')
+    bpy.ops.import_scene.obj(filepath=earth_path)
+
+    earth = bpy.context.selected_objects
+    print(earth)
+    for e in earth:
+        e.location = [25, 0, 0]
     #delete_all_objects()
 
     print(sat)
@@ -269,7 +278,6 @@ def main():
         for idx in tqdm(range(len(positions))):
             
             for satt in sat:
-
                 # now we will describe frame with number $number_of_frame
                 scene.frame_set(number_of_frame)
 
@@ -280,8 +288,116 @@ def main():
                 satt.rotation_euler = rotations[idx]
                 satt.keyframe_insert(data_path="rotation_euler", index=-1)
 
-            # move next 10 frames forward - Blender will figure out what to do between this time
+                # move next 10 frames forward - Blender will figure out what to do between this time
             number_of_frame += frame_gap-1
+        #print("FFFF")
+    cam = bpy.data.objects['Camera 1']
+    bpy.ops.object.empty_add(location=(0, 0, 0))
+    constraint = cam.constraints.new(type='TRACK_TO')
+    constraint.target = bpy.data.objects['Empty']
+    constraint.track_axis = 'TRACK_NEGATIVE_Z'
+    constraint.up_axis = 'UP_Y'
+
+    if toml_dict["camera_flightpath"]["flight_path_type"] == "POINT":
+        camera_positions = toml_dict["camera_flightpath"]["positions"]
+        camera_rotations = toml_dict["camera_flightpath"]["rotations"]
+        
+        camera_frame_gap = (len_of_ani*24) // (len(positions)-1)
+        number_of_frame = 0  
+        for idx in tqdm(range(len(positions))):
+            
+            
+                # now we will describe frame with number $number_of_frame
+                scene.frame_set(number_of_frame)
+
+                # set new location for sphere $kule and new rotation for cube $kostka
+                cam.location = camera_positions[idx]
+                cam.keyframe_insert(data_path="location", index=-1)
+
+                cam.rotation_euler = camera_rotations[idx]
+                cam.keyframe_insert(data_path="rotation_euler", index=-1)
+
+            # move next 10 frames forward - Blender will figure out what to do between this time
+                number_of_frame += camera_frame_gap-1
+        #print("FFFF")
+
+    if toml_dict["camera_flightpath"]["flight_path_type"] == "FUNCTION":
+        positions = []
+        camera_positions = toml_dict["camera_flightpath"]["positions"]
+        camera_rotations = toml_dict["camera_flightpath"]["rotations"]
+        
+        camera_frame_gap = (len_of_ani*24) // (len(positions)-1)
+        number_of_frame = 0 
+        print("AAAAAAAAAAAAAAAAAAAAAAAA")
+        # def flight_path(x, frame_distance):
+        #     new_position_x = x + frame_distance[0] #pow function isn't working
+        #     new_position_y = eval(toml_dict["flightpath"]["y_eq"])
+        #     new_position_z = eval(toml_dict["flightpath"]["z_eq"])
+        #     new_position = (new_position_x, new_position_y, new_position_z)
+        #     return new_position
+
+
+        def flight_path(t):
+            new_position_x = eval(toml_dict["camera_flightpath"]["x_eq"])
+            new_position_y = eval(toml_dict["camera_flightpath"]["y_eq"])
+            new_position_z = eval(toml_dict["camera_flightpath"]["z_eq"])
+            new_position = (new_position_x, new_position_y, new_position_z)
+            return new_position
+
+
+
+
+        #POSIBLE CHANGES:
+        # start_position = toml_dict["flightpath"]["positions"][0]
+        # end_position = toml_dict["flightpath"]["positions"][1]
+        # start_to_finish = tuple(map(lambda i, j: j-i, start_position, end_position))
+        
+        position_amount = toml_dict["animation"]["animation_lenth"] * 24
+        # frame_distance = tuple(map(lambda i: i/position_amount, start_to_finish))
+
+
+        # for i in range(position_amount):
+        #     start_position = flight_path(start_position[0], frame_distance)
+        #     print("new position", start_position)
+        #     positions.append(start_position)
+
+        for i in range(position_amount):
+            # pass i instead of start_position
+            start_position = flight_path(i)
+            #print("new position", start_position)
+            positions.append(start_position)
+
+        ani_setting = toml_dict["animation"]
+
+        len_of_ani = ani_setting["animation_lenth"]
+
+        frame_gap = (len_of_ani*24) // (len(positions)-1)
+
+
+        # start with frame 0
+        number_of_frame = 0  
+        for idx in range(len(positions)):
+            
+            
+
+            # now we will describe frame with number $number_of_frame
+            scene.frame_set(number_of_frame)
+
+            # set new location for sphere $kule and new rotation for cube $kostka
+            cam.location = positions[idx]
+            #print(positions[idx])
+            cam.keyframe_insert(data_path="location", index=-1)
+
+            if idx == 0 or idx == len(positions)-1:
+                print("ROT IDX", idx)
+                if idx ==0:
+                    cam.rotation_euler = rotations[idx]
+                else:
+                    cam.rotation_euler = rotations[-1]
+                cam.keyframe_insert(data_path="rotation_euler", index=-1)
+
+            # move next 10 frames forward - Blender will figure out what to do between this time
+            number_of_frame += 1
         #print("FFFF")
 
     if toml_dict["flightpath"]["flight_path_type"] == "FUNCTION":
@@ -305,7 +421,7 @@ def main():
 
 
 
-#POSIBLE CHANGES:
+        #POSIBLE CHANGES:
         # start_position = toml_dict["flightpath"]["positions"][0]
         # end_position = toml_dict["flightpath"]["positions"][1]
         # start_to_finish = tuple(map(lambda i, j: j-i, start_position, end_position))
@@ -322,7 +438,7 @@ def main():
         for i in range(position_amount):
             # pass i instead of start_position
             start_position = flight_path(i)
-            print("new position", start_position)
+            #print("new position", start_position)
             positions.append(start_position)
 
         ani_setting = toml_dict["animation"]
@@ -343,7 +459,7 @@ def main():
 
                 # set new location for sphere $kule and new rotation for cube $kostka
                 satt.location = positions[idx]
-                print(positions[idx])
+                #print(positions[idx])
                 satt.keyframe_insert(data_path="location", index=-1)
 
                 if idx == 0 or idx == len(positions)-1:
@@ -377,17 +493,17 @@ def main():
     import json
     annotations = []
 
-    for frame in range(len_of_ani*24):
-        annotation = {
-            'Frame': frame ,
-            'Image': output_dir + str(frame),
-            'Pose_info': get_location(sat[0], frame), 
-            'Position': positions[frame]
-        }
+    # for frame in range(len_of_ani*24):
+    #     annotation = {
+    #         'Frame': frame ,
+    #         'Image': output_dir + str(frame),
+    #         'Pose_info': get_location(sat[0], frame), 
+    #         'Position': positions[frame]
+    #     }
 
-        annotations.append(annotation)
-        print(frame)
-        get_location(sat[0], frame)
+    #     annotations.append(annotation)
+    #     print(frame, get_location(sat[0], frame))
+    #     get_location(sat[0], frame)
 
     with open(output_dir+"sample.json" , "w") as outfile:
         outfile.write(json.dumps(annotations))

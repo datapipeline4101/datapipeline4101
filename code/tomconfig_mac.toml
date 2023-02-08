@@ -1,7 +1,7 @@
 [lighting]
 light_type = "POINT"
-location = [10, -10, 10]
-energy = 10000
+location = [5, -15, 5]
+energy = 100000
 
 [camera]
 location = [0.0, -6.5, 0.0]
@@ -10,19 +10,32 @@ lens = 20
 
 [satellite]
 satellite_file= "/models/nasa-aqua-satellite-obj/nasa-aqua-satellite.obj"
+#look at stl
 
 [background]
 background_file= "/code/space.jpg"
 
+[earth]
+earth_file = "/models/earth/Globe.obj"
+earth_location = ""
+
 [flightpath]
+flight_path_type = "POINT" # 
+positions = [[0,0,0],[0,0,0]]
+rotations = [[0,0,0],[0,0,0]]
+x_eq = "0.1*math.cos(t)"
+y_eq = "0.1*math.sin(t)"
+z_eq = "1"
+
+[camera_flightpath]
 flight_path_type = "FUNCTION" # 
-positions = [[-10,0,0],[10,6,1]]
-rotations = [[0,0,0],[0.8,2.4,1.5]]
-x_eq = "t"
-y_eq = "2*t**2"
-z_eq = "0*t**2"
+positions = [[0,0,0],[0,-15,0]]
+rotations = [[1.5, 0.0, 0.0],[1.5, 0.0, 0.0]]
+x_eq = "15*math.cos(t/10.0)"
+y_eq = "15*math.sin(t/10.0)"
+z_eq = "0"
 
 [animation]
-animation_lenth = 10 # In seconds # add fps
+animation_lenth = 100 # In seconds # add fps
 file_format = "JPEG"
 output_dir = "E:/tmp/"

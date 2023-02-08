@@ -132,6 +132,7 @@ def delete_all_objects():
             else:
                 o.select_set(True)
     # Deletes all selected objects in the scene:
+    bpy.ops.object.delete() 
 
 def get_location(obj, frame):
     bpy.context.scene.frame_set(frame)
