@@ -43,7 +43,7 @@ Plan (Jan 16)
 
 Milestone 4 (Feb 13)
 
-[Presentation](Milesonte_4_pres.pdf), [Progress Evaluation](update_doc_4.pdf)
+[Presentation](Milestone_4_pres.pdf), [Progress Evaluation](update_doc_4.pdf)
 
 Milestone 5 (Mar 20)
 
