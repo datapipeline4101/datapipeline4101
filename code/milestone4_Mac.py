@@ -4,7 +4,6 @@ import bpy
 #import numpy as np
 import os
 import tqdm
-import toml
 import math
 
 
@@ -252,13 +251,66 @@ def main():
     #delete_all_objects()
 
     print(sat)
-    
+    import random
+
+    # Set the number of stars to create
+    num_stars = 1000
+
+    # Set the size range for the stars
+    min_size = 0.01
+    max_size = 0.1
+
+    # Set the location range for the stars
+    min_loc = -100
+    max_loc = 100
+
+    # Set the brightness range for the stars
+    min_bright = 1
+    max_bright = 10
+
+    # Create a new material for the stars
+    mat = bpy.data.materials.new(name="StarMaterial")
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    emission_node = nodes.new(type="ShaderNodeEmission")
+    emission_node.inputs[0].default_value = (1.0, 1.0, 1.0, 1.0)
+
+    # Create the stars
+    for i in range(num_stars):
+        # Create a new sphere mesh for the star
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=random.uniform(min_size, max_size), location=(random.uniform(min_loc, max_loc), random.uniform(min_loc, max_loc), random.uniform(min_loc, max_loc)))
+
+        # Add the material to the star
+        bpy.context.object.active_material = mat
+
+        # Set the brightness of the star
+        brightness = random.uniform(min_bright, max_bright)
+        emission_node.inputs[1].default_value = brightness
+
+        # Set the random rotation of the star
+        bpy.ops.transform.rotate(value=random.uniform(0, 2 * 3.14), orient_axis='X')
+        bpy.ops.transform.rotate(value=random.uniform(0, 2 * 3.14), orient_axis='Y')
+        bpy.ops.transform.rotate(value=random.uniform(0, 2 * 3.14), orient_axis='Z')
+
+        # Set the random scale of the star
+        bpy.ops.transform.resize(value=(random.uniform(0.5, 1.5), random.uniform(0.5, 1.5), random.uniform(0.5, 1.5)))
+
+        # Set the random location of the star
+        bpy.ops.transform.translate(value=(random.uniform(min_loc, max_loc), random.uniform(min_loc, max_loc), random.uniform(min_loc, max_loc)))
+
+
+
+
+    world = bpy.data.worlds["World"]
+    world.node_tree.nodes["Background"].inputs[0].default_value = (0, 0, 0, 1)
+
+
     light_data = toml_dict["lighting"]
     create_light(type=light_data["light_type"], energy=light_data["energy"], location=tuple(light_data["location"]))
 
     camera_settings = toml_dict["camera"]
     create_camera(location=camera_settings["location"], rotation=camera_settings["rotation"], lens=camera_settings["lens"])
-    back_ground_adder((base_path+toml_dict["background"]["background_file"]))
+    #back_ground_adder((base_path+toml_dict["background"]["background_file"]))
     scene = bpy.context.scene
     
     positions = toml_dict["flightpath"]["positions"]
