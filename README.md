@@ -47,7 +47,7 @@ Milestone 4 (Feb 13)
 
 Milestone 5 (Mar 20)
 
-[Poster](poster.pdf), [e-book page](ebook.pdf), [Presentation](milestone5.pdf), [Progress Evaluation](eval5.pdf)
+[Poster](Senior_Design_Poster.pptx.pdf), [e-book page](ebook_page.pdf), [Presentation](Mile_5_prez.pdf), [Progress Evaluation](update_doc_5.pdf)
 
 Milestone 6 (Apr 17)
 
