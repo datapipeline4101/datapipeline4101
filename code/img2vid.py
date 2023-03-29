@@ -5,7 +5,7 @@ import os
 #import natsort
 
 image_folder = 'E:/tmp/'
-video_name = 'video_earth_rot.avi'
+video_name = 'video_earth_rot_stars.avi'
 files = (os.listdir(image_folder))
 print(files)
 files = sorted(files,key=lambda x: int(os.path.splitext(x)[0]))

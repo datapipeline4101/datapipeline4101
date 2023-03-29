@@ -257,16 +257,16 @@ def main():
     num_stars = 1000
 
     # Set the size range for the stars
-    min_size = 0.01
-    max_size = 0.1
+    min_size = 0.05
+    max_size = 0.2
 
     # Set the location range for the stars
-    min_loc = -100
-    max_loc = 100
+    min_loc = -300
+    max_loc = 300
 
     # Set the brightness range for the stars
-    min_bright = 1
-    max_bright = 10
+    min_bright = 100
+    max_bright = 600
 
     # Create a new material for the stars
     mat = bpy.data.materials.new(name="StarMaterial")
@@ -276,7 +276,7 @@ def main():
     emission_node.inputs[0].default_value = (1.0, 1.0, 1.0, 1.0)
 
     # Create the stars
-    for i in range(num_stars):
+    for i in tqdm(range(num_stars)):
         # Create a new sphere mesh for the star
         bpy.ops.mesh.primitive_uv_sphere_add(radius=random.uniform(min_size, max_size), location=(random.uniform(min_loc, max_loc), random.uniform(min_loc, max_loc), random.uniform(min_loc, max_loc)))
 

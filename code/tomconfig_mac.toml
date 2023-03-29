@@ -17,7 +17,16 @@ background_file= "/code/space.jpg"
 
 [earth]
 earth_file = "/models/earth/Globe.obj"
-earth_location = ""
+earth_location = [5, 5, 5]
+
+[stars]
+star_seed=1
+num_stars= 100
+min_dist = 50
+max_dist = 1000
+brightness = 100
+max_size = 0.1
+min_size = 0.01
 
 [flightpath]
 flight_path_type = "POINT" # 
