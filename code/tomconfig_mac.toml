@@ -1,50 +1,58 @@
 [lighting]
-light_type = "POINT"
-location = [5, -15, 5]
-energy = 100000
+light_type = "SUN"
+location = [5, -500, 5]
+energy = 10
+roatation = [1.5, 0.0, 0.0]
 
 [camera]
 location = [0.0, -6.5, 0.0]
 rotation = [1.5, 0.0, 0.0]
 lens = 20
+view_locked = true
+lock_point = [0, 0, 0]
+
 
 [satellite]
-satellite_file= "/models/nasa-aqua-satellite-obj/nasa-aqua-satellite.obj"
+satellite_file= "/models/JunoOBJ/JunoOBJ/Juno.obj"
 #look at stl
 
 [background]
 background_file= "/code/space.jpg"
+static_background=false
 
 [earth]
-earth_file = "/models/earth/Globe.obj"
-earth_location = [5, 5, 5]
+earth_file = "/models/meme/flatheadandy.obj"
+earth_location = [10, 0, 0]
+# add scaling factor 
 
 [stars]
-star_seed=1
-num_stars= 100
-min_dist = 50
-max_dist = 1000
-brightness = 100
-max_size = 0.1
-min_size = 0.01
+star_seed=500
+num_stars= 0
+min_dist = -500
+max_dist = 500
+min_bright = 600
+max_bright = 800
+max_size = 0.25
+min_size = 0.15
 
 [flightpath]
-flight_path_type = "POINT" # 
+flight_path_type = "FUNCTION" # 
 positions = [[0,0,0],[0,0,0]]
-rotations = [[0,0,0],[0,0,0]]
-x_eq = "0.1*math.cos(t)"
-y_eq = "0.1*math.sin(t)"
+rotations = [[0,0,0],[0,50,0]]
+x_eq = "0.0001*math.cos(t)"
+y_eq = "0.0001*math.sin(t)"
 z_eq = "1"
 
 [camera_flightpath]
 flight_path_type = "FUNCTION" # 
-positions = [[0,0,0],[0,-15,0]]
+positions = [[50,-15,0],[-100,-15,0]]
 rotations = [[1.5, 0.0, 0.0],[1.5, 0.0, 0.0]]
-x_eq = "15*math.cos(t/10.0)"
-y_eq = "15*math.sin(t/10.0)"
+x_eq = "15*math.cos(t/20.0)"
+y_eq = "15*math.sin(t/20.0)"
 z_eq = "0"
 
 [animation]
-animation_lenth = 100 # In seconds # add fps
+animation_lenth = 8 # In seconds 
+fps = 30
 file_format = "JPEG"
 output_dir = "E:/tmp/"

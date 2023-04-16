@@ -4,7 +4,7 @@ light_type = "POINT"
 # Location of point source
 location = (10, -10, 10)
 # Strength of light source
-energy = 10000
+energy = 1000
 
 [satellite]
 #path to satellite inside file
