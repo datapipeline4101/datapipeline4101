@@ -27,7 +27,7 @@ Milestone 1 (Oct 3)
 
 [Requirement](requirement.pdf), [Design](design1.pdf), [Test](test.pdf), [Presentation](Mile1presen.pdf), [Progress Evaluation](eval1.pdf)
 
-Milestone 2 (Oct 31)
+Milestone 2 (Oct 31) 
 
 [Presentation](Mile2_pres.pdf), [Progress Evaluation](update_doc_2.pdf)
 
