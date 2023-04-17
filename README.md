@@ -51,7 +51,7 @@ Milestone 5 (Mar 20)
 
 Milestone 6 (Apr 17)
 
-[User and/or Developer Manual](userManual.pdf), [Demo Video](demoVideo.jpg), [Presentation](milestone6.pdf), [Progress Evaluation](eval6.pdf)
+[User and/or Developer Manual](https://docs.google.com/document/d/1f2-fRwDwIMu1rQtyr8x-ECNHY79iO-a0F0htBay8L9E/edit?usp=sharing), [Demo Video](demoVideo.jpg), [Presentation](update_doc_6.pdf), [Progress Evaluation](update_doc6-1.pdf)
 
 * * *
 
