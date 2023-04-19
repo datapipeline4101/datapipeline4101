@@ -27,7 +27,7 @@ Milestone 1 (Oct 3)
 
 [Requirement](requirement.pdf), [Design](design1.pdf), [Test](test.pdf), [Presentation](Mile1presen.pdf), [Progress Evaluation](eval1.pdf)
 
-Milestone 2 (Oct 31)
+Milestone 2 (Oct 31) 
 
 [Presentation](Mile2_pres.pdf), [Progress Evaluation](update_doc_2.pdf)
 
@@ -51,7 +51,7 @@ Milestone 5 (Mar 20)
 
 Milestone 6 (Apr 17)
 
-[User and/or Developer Manual](userManual.pdf), [Demo Video](demoVideo.jpg), [Presentation](milestone6.pdf), [Progress Evaluation](eval6.pdf)
+[User and/or Developer Manual](https://docs.google.com/document/d/1f2-fRwDwIMu1rQtyr8x-ECNHY79iO-a0F0htBay8L9E/edit?usp=sharing), [Demo Video](demoVideo.mp4), [Presentation](Mile_6_prez.pdf), [Progress Evaluation](update_doc_6-1.pdf)
 
 * * *
 
